@@ -1,6 +1,7 @@
-package models;
+package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ToDoList {
     private String name;
@@ -11,6 +12,10 @@ public class ToDoList {
         this.name = name;
     }
 
+    public ToDoList() {
+
+    }
+
     public void addTask(ToDoTask task) {
         tasks.add(task);
     }
@@ -19,10 +24,16 @@ public class ToDoList {
         tasks.remove(task);
     }
 
+    public List<ToDoTask> getTasks() {
+        return tasks;
+
+    }
+
     @Override
     public String toString() {
         String result = "ToDoList Title: " + name + "\n";
         result += tasks.toString();
         return result;
     }
+
 }
