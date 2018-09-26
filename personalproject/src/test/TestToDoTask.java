@@ -14,14 +14,14 @@ public class TestToDoTask {
 
     @BeforeEach
     public void runBefore() {
-        task1 = new ToDoTask("review meeting", "critical", new Date());
+        task1 = new ToDoTask("review meeting", ToDoTask.Importance.HIGH, new Date());
     }
 
     @Test
     public void testConstructor(){
         assertEquals("review meeting", task1.getTitle());
         assertEquals(false, task1.getIsDone());
-        assertEquals("critical", task1.getPriority());
+        assertEquals(ToDoTask.Importance.HIGH, task1.getPriority());
     }
 
     @Test

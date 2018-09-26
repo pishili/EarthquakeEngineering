@@ -14,10 +14,10 @@ public class TestToDoList {
     private ToDoList myTasks;
 
     public TestToDoList() {
-        t1 = new ToDoTask("cs221", "important", new Date());
-        t2 = new ToDoTask("213", "not important", new Date());
-        t3 = new ToDoTask("121", "super important", new Date());
-        t4 = new ToDoTask("210", "Super important", new Date());
+        t1 = new ToDoTask("cs221", ToDoTask.Importance.HIGH, new Date());
+        t2 = new ToDoTask("213", ToDoTask.Importance.HIGH, new Date());
+        t3 = new ToDoTask("121", ToDoTask.Importance.HIGH, new Date());
+        t4 = new ToDoTask("210", ToDoTask.Importance.HIGH, new Date());
 
         myTasks = new ToDoList("MY TASKS");
         myTasks.addTask(t1);

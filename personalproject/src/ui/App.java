@@ -43,7 +43,7 @@ public class App {
         System.out.println("Please enter your task to be added to your TODO list with its importance and due date");
         String tasktitle = scanner.nextLine();
         String importance = scanner.nextLine();
-        ToDoTask task1 = new ToDoTask(tasktitle, importance, new Date());
+        ToDoTask task1 = new ToDoTask(tasktitle, ToDoTask.Importance.MEDIUM, new Date());
         taskarchive.addTask(task1);
         logEntry.addOperand(task1);
         return tasktitle;

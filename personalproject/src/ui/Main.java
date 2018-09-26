@@ -1,12 +1,8 @@
 package ui;
 import model.ToDoList;
 import model.ToDoTask;
-import ui.LogEntry;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
 
 public class Main {
 
@@ -22,10 +18,10 @@ public class Main {
 //        ToDoList taskarchive = new ToDoList();
 //
 //        // Create tasks
-        ToDoTask t1 = new ToDoTask("First Task", "new", new Date());
-        ToDoTask t2 = new ToDoTask("Second Task", "pending", new Date());
-        ToDoTask t3 = new ToDoTask("Third Task", "pending", new Date());
-        ToDoTask t4 = new ToDoTask("Workout Task", "finished" , new Date());
+        ToDoTask t1 = new ToDoTask("First Task", ToDoTask.Importance.HIGH, new Date());
+        ToDoTask t2 = new ToDoTask("Second Task", ToDoTask.Importance.LOW, new Date());
+        ToDoTask t3 = new ToDoTask("Third Task", ToDoTask.Importance.MEDIUM, new Date());
+        ToDoTask t4 = new ToDoTask("Workout Task", ToDoTask.Importance.HIGH , new Date());
 
         // Print tasks
         printTask(t1);

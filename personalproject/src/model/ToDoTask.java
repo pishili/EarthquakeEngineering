@@ -5,23 +5,24 @@ import java.util.Date;
 public class ToDoTask {
     private String title;
     private Long id;
+    private String category;
     private Boolean isDone;
-    private String importance;
+    private Importance importance;
     private Date dueDate;
 
-    public ToDoTask(String title, String importance, Date dueDate) {
-        this.id = id;
+    public ToDoTask(String title, Importance importance, Date dueDate) {
         this.title = title;
         this.isDone = false;
         this.importance = importance;
         this.dueDate = dueDate;
+
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setPriority(String priority) { this.importance = priority; }
+    public void setPriority(Importance priority) { this.importance = priority; }
 
     public void setIsDone(Boolean isDone) {
         this.isDone = isDone;
@@ -35,7 +36,7 @@ public class ToDoTask {
         return this.title;
     }
 
-    public String getPriority() {
+    public Importance getPriority() {
         return this.importance;
     }
 
@@ -53,6 +54,12 @@ public class ToDoTask {
 
     public boolean isDone() {
         return isDone;
+    }
+
+    public static enum Importance {
+        HIGH,
+        MEDIUM,
+        LOW
     }
 
 }
