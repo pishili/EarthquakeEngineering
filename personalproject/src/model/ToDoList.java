@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ToDoList extends AbstractItem {
+public class ToDoList {
     private String name;
     private String status;
     private Date dueDate;

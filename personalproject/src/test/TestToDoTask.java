@@ -21,4 +21,11 @@ public class TestToDoTask {
         assertEquals("not finished", task1.getStatus());
         assertEquals("very important", task1.getPriority());
     }
+
+    @Test
+    public void testToDoDone(){
+        task1.isDone(20012-10-4 10:15:25);
+
+
+    }
 }
