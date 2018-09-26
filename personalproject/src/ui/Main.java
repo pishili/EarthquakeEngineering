@@ -1,21 +1,20 @@
 package ui;
 import model.ToDoList;
 import model.ToDoTask;
-package starter;
 import ui.LogEntry;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    package ui;
 
 
     public static void main(String[] args) {
         new App();
         ToDoTask task;
-        ToDoList taskarchive = new ToDoList();
+        ToDoList taskarchive = new ToDoList("aList");
 //
 //        ArrayList<LogEntry> operationLog = new ArrayList<>();
 //        Scanner scanner = new Scanner(System.in);
@@ -23,10 +22,10 @@ public class Main {
 //        ToDoList taskarchive = new ToDoList();
 //
 //        // Create tasks
-        ToDoTask t1 = new ToDoTask("First Task", "new", "1");
-        ToDoTask t2 = new ToDoTask("Second Task", "pending", "2");
-        ToDoTask t3 = new ToDoTask("Third Task", "pending", "1");
-        ToDoTask t4 = new ToDoTask("Workout Task", "finished" , "1");
+        ToDoTask t1 = new ToDoTask("First Task", "new", new Date());
+        ToDoTask t2 = new ToDoTask("Second Task", "pending", new Date());
+        ToDoTask t3 = new ToDoTask("Third Task", "pending", new Date());
+        ToDoTask t4 = new ToDoTask("Workout Task", "finished" , new Date());
 
         // Print tasks
         printTask(t1);
@@ -56,7 +55,5 @@ public class Main {
         System.out.println("Called printList");
         System.out.println(list);
     }
-
-}
 
 }

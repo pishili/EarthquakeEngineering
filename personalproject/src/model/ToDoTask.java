@@ -5,14 +5,14 @@ import java.util.Date;
 public class ToDoTask {
     private String title;
     private Long id;
-    private String status;
+    private Boolean isDone;
     private String importance;
     private Date dueDate;
 
-    public ToDoTask(String title, String status, String importance) {
+    public ToDoTask(String title, String importance, Date dueDate) {
         this.id = id;
         this.title = title;
-        this.status = status;
+        this.isDone = false;
         this.importance = importance;
         this.dueDate = dueDate;
     }
@@ -21,14 +21,14 @@ public class ToDoTask {
         this.title = title;
     }
 
-    public void setPriority(String priority) { this.importance = importance; }
+    public void setPriority(String priority) { this.importance = priority; }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIsDone(Boolean isDone) {
+        this.isDone = isDone;
     }
 
-    public String getStatus() {
-        return this.status;
+    public Boolean getIsDone() {
+        return this.isDone;
     }
 
     public String getTitle() {
@@ -40,24 +40,19 @@ public class ToDoTask {
     }
 
     public String toString(){
-        return "Task title: " + title + ", Status: " + status;
+        return "Task title: " + title + ", Status: " + isDone;
     }
 
-    public getDueDate() {
+    public Date getDueDate() {
         return this.dueDate;
     }
 
-    public Date setDueDate(Date dued){
+    public void setDueDate(Date dued){
         this.dueDate = dued;
     }
 
-    public boolean isDone(Date date) {
-        if (this.dueDate.after(date)) {
-            status = true;
-        } else {
-            status = false;
-        }
-        return status;
+    public boolean isDone() {
+        return isDone;
     }
 
 }

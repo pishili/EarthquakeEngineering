@@ -4,6 +4,8 @@ import model.ToDoTask;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestToDoTask {
@@ -12,20 +14,20 @@ public class TestToDoTask {
 
     @BeforeEach
     public void runBefore() {
-        task1 = new ToDoTask("review meeting", "not finished", "very important");
+        task1 = new ToDoTask("review meeting", "critical", new Date());
     }
 
     @Test
     public void testConstructor(){
         assertEquals("review meeting", task1.getTitle());
-        assertEquals("not finished", task1.getStatus());
-        assertEquals("very important", task1.getPriority());
+        assertEquals(false, task1.getIsDone());
+        assertEquals("critical", task1.getPriority());
     }
 
     @Test
     public void testToDoDone(){
-        task1.isDone(20012-10-4 10:15:25);
-
-
+        assertEquals(task1.getIsDone(), false);
+        task1.setIsDone(true);
+        assertEquals(task1.getIsDone(), true);
     }
 }

@@ -4,12 +4,13 @@ import model.ToDoList;
 import model.ToDoTask;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
     //    ArrayList<LogEntry> operationLog = new ArrayList<>();
-    ToDoList taskarchive = new ToDoList();
+    ToDoList taskarchive = new ToDoList("archive");
     Scanner scanner = new Scanner(System.in);
 
     public App() {
@@ -39,11 +40,10 @@ public class App {
     }
 
     private String one(LogEntry logEntry) {
-        System.out.println("Please enter your task to be added to your TODO list with its importance and status");
+        System.out.println("Please enter your task to be added to your TODO list with its importance and due date");
         String tasktitle = scanner.nextLine();
         String importance = scanner.nextLine();
-        String status = scanner.nextLine();
-        ToDoTask task1 = new ToDoTask(tasktitle, status, importance);
+        ToDoTask task1 = new ToDoTask(tasktitle, importance, new Date());
         taskarchive.addTask(task1);
         logEntry.addOperand(task1);
         return tasktitle;
@@ -69,3 +69,4 @@ public class App {
         }
         return list;
     }
+}

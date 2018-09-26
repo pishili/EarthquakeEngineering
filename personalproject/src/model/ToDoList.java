@@ -32,7 +32,8 @@ public class ToDoList {
     }
 
     public boolean getStatus(){
-        return this.status;
+        // Todo
+        return false;
     }
 
     public void dueDate(){
