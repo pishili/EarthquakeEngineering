@@ -2,10 +2,12 @@ package model;
 
 public class ToDoTask {
     private String title;
+    private Long id;
     private String status;
     private String importance;
 
     public ToDoTask(String title, String status, String importance) {
+        this.id = id;
         this.title = title;
         this.status = status;
         this.importance = importance;

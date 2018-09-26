@@ -1,19 +1,18 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class ToDoList {
+public class ToDoList extends AbstractItem {
     private String name;
-    private ArrayList<ToDoTask> tasks = new ArrayList<>();
+    private String status;
+    private Date dueDate;
+    private ArrayList<ToDoTask> tasks = new ArrayList<>() ;
 
 
     public ToDoList(String name) {
         this.name = name;
-    }
-
-    public ToDoList() {
-
     }
 
     public void addTask(ToDoTask task) {
@@ -26,7 +25,19 @@ public class ToDoList {
 
     public List<ToDoTask> getTasks() {
         return tasks;
+    }
 
+    public void setName(){
+        this.name = name;
+    }
+
+    public boolean getStatus(){
+        return this.status;
+    }
+
+    public void dueDate(){
+        this.dueDate = dueDate;
+//        Date date1 = sdf.parse("20012-10-4 10:15:25");
     }
 
     @Override
@@ -35,5 +46,4 @@ public class ToDoList {
         result += tasks.toString();
         return result;
     }
-
 }
