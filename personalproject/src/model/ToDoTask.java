@@ -52,7 +52,7 @@ public class ToDoTask {
         this.dueDate = dued;
     }
 
-    public boolean isDone() {
+    public boolean isDone()  {
         return isDone;
     }
 
