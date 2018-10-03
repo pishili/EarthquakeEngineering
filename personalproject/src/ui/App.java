@@ -44,7 +44,7 @@ public class App {
         String tasktitle = scanner.nextLine();
         String importance = scanner.nextLine();
         RegularToDoTask task1 = new RegularToDoTask(tasktitle, RegularToDoTask.Importance.MEDIUM, new Date());
-        taskarchive.addTask(task1);
+        taskarchive.addRegularTask(task1);
         logEntry.addOperand(task1);
         return tasktitle;
     }
@@ -52,9 +52,9 @@ public class App {
     private String two(LogEntry logEntry) {
         System.out.println("Please enter the title of the task you would like to remove");
         String tasktitle = scanner.nextLine();
-        for (RegularToDoTask item : taskarchive.getTasks()) {
+        for (RegularToDoTask item : taskarchive.getRegTasks()) {
             if (item.getTitle() == tasktitle) {
-                taskarchive.removeTask(item);
+                taskarchive.getRegTasks(item);
             }
         }
         return tasktitle;
@@ -63,7 +63,7 @@ public class App {
     private List<String> three(LogEntry logEntry) {
         System.out.println("We will print all your active tasks for you!");
         List<String> list = new ArrayList<>();
-        for (RegularToDoTask item : taskarchive.getTasks()) {
+        for (RegularToDoTask item : taskarchive.getRegTasks()) {
             System.out.println(item.getTitle());
             list.add(item.getTitle());
         }

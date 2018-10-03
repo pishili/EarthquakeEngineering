@@ -8,17 +8,14 @@ public class UrgentTask extends Item {
     private Long id;
     private String category;
     private Boolean isDone;
-    private RegularToDoTask.Importance importance;
     private Date dueDate;
 
-    public UrgentTask(String title, RegularToDoTask.Importance importance, Date dueDate, String urgentImportance) {
-        super.setTitle(title);
-        super.setTitle(title);
+    public UrgentTask(String title, Date dueDate) {
         this.isDone = false;
-        this.importance = importance;
         this.dueDate = dueDate;
-        this.urgentImportance = urgentImportance;
+        importance = Importance.HIGH;
     }
+
 
     @Override
     public void setDueDate(Date date){
@@ -38,8 +35,16 @@ public class UrgentTask extends Item {
         return super.complete();
     }
 
+    @Override
+    public void setPriority(Importance priority) {
+        // do nothing
+    }
+
     public String getImportance(String urgentImportance){
 //        System.out.println("This task should be completed by Tomorrow");
         return urgentImportance + "should be completed by tomorrow";
     }
+
+
+
 }

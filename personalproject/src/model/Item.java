@@ -2,20 +2,26 @@ package model;
 
 import java.util.Date;
 
-public abstract class Item implements ToDos {
-    String title;
-    Long id;
-    Date dueDate;
-    Boolean iscomplete;
+public abstract class Item implements ToDos, Prioritizable {
+    protected String title;
+    protected Long id;
+    protected Date dueDate;
+    protected Boolean iscomplete;
+    protected Importance importance;
 
     public Item(){
         this.iscomplete = true;
 
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title, Date mydueDate) {
         System.out.println("Print the title!");
         this.title = title;
+        this.dueDate = mydueDate;
+
+    }
+    public Importance getPriority() {
+        return this.importance;
     }
 
     public String getTitle() {
@@ -36,4 +42,5 @@ public abstract class Item implements ToDos {
         }return false;
 
     }
+
 }

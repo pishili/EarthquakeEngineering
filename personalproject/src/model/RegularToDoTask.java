@@ -5,16 +5,10 @@ import java.util.Date;
 public class RegularToDoTask extends Item {
 
     private String category;
-    private Boolean isDone;
-    private Importance importance;
 
 
-    public RegularToDoTask(String title, Importance importance, Date dueDate) {
-        super.setTitle(title);
-        super.setTitle(title);
-        this.isDone = false;
-        this.importance = importance;
-
+    public RegularToDoTask(String title, Importance high, Date dueDate) {
+        this.iscomplete = false;
     }
 
     @Override
@@ -38,30 +32,21 @@ public class RegularToDoTask extends Item {
     public void setPriority(Importance priority) { this.importance = priority; }
 
     public void setIsDone(Boolean isDone) {
-        this.isDone = isDone;
+        this.iscomplete = isDone;
     }
 
     public Boolean getIsDone() {
-        return this.isDone;
-    }
-
-    public Importance getPriority() {
-        return this.importance;
+        return this.iscomplete;
     }
 
     public String toString(){
-        return "Task title: " + title + ", Status: " + isDone;
+        return "Task title: " + title + ", Status: " + iscomplete;
     }
 
     public boolean isDone()  {
-        return isDone;
+        return iscomplete;
     }
 
-    public static enum Importance {
-        HIGH,
-        MEDIUM,
-        LOW
-    }
 
 }
 

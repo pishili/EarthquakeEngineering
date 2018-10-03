@@ -2,29 +2,48 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ToDoList {
     private String name;
+    private String title;
     private String status;
     private Date dueDate;
-    private ArrayList<RegularToDoTask> tasks = new ArrayList<>() ;
+    RegularToDoTask regularTask;
+    UrgentTask urgentTask;
+    private ArrayList<RegularToDoTask> regulartasks;
+    private ArrayList<UrgentTask> urgenttasks ;
 
 
-    public ToDoList(String name) {
-        this.name = name;
+    public ToDoList() {
+        this.title = title;
+        regularTask = new RegularToDoTask(title, RegularToDoTask.Importance.HIGH, dueDate);
+        urgentTask = new UrgentTask(title, dueDate);
+        regulartasks= new ArrayList<>();
+        urgenttasks = new ArrayList<>();
+}
+
+    public void addRegularTask(RegularToDoTask task) {
+        regulartasks.add(task);
     }
 
-    public void addTask(RegularToDoTask task) {
-        tasks.add(task);
+    public void addUrgentTask(UrgentTask task) {
+        urgenttasks.add(task);
     }
 
-    public void removeTask(RegularToDoTask task) {
-        tasks.remove(task);
+    public void removeRegTask(RegularToDoTask task) {
+        regulartasks.remove(task);
     }
 
-    public List<RegularToDoTask> getTasks() {
-        return tasks;
+    public void removeUrgTask(UrgentTask task) {
+        urgenttasks.remove(task);
+    }
+
+    public ArrayList<RegularToDoTask> getRegTasks() {
+        return regulartasks;
+    }
+
+    public ArrayList<UrgentTask> getRegTasks() {
+        return urgenttasks;
     }
 
     public void setName(){
@@ -44,7 +63,8 @@ public class ToDoList {
     @Override
     public String toString() {
         String result = "ToDoList Title: " + name + "\n";
-        result += tasks.toString();
+        result += urgenttasks.toString();
+        result += regulartasks.toString();
         return result;
     }
 }
