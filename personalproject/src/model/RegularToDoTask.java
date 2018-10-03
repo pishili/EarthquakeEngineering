@@ -2,24 +2,31 @@ package model;
 
 import java.util.Date;
 
-public class ToDoTask {
-    private String title;
-    private Long id;
+public class RegularToDoTask extends Item {
+
     private String category;
     private Boolean isDone;
     private Importance importance;
-    private Date dueDate;
 
-    public ToDoTask(String title, Importance importance, Date dueDate) {
-        this.title = title;
+
+    public RegularToDoTask(String title, Importance importance, Date dueDate) {
+        super.setTitle(title);
+        super.setTitle(title);
         this.isDone = false;
         this.importance = importance;
-        this.dueDate = dueDate;
 
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    @Override
+    public void setDueDate(Date date){
+        System.out.println("Regular Item has extended Due Date");
+        super.setDueDate(dueDate);
+    }
+
+    @Override
+    public Date getDueDate(Date date){
+        System.out.println("What is the Due Date?");
+        return super.getDueDate(dueDate);
     }
 
     public void setPriority(Importance priority) { this.importance = priority; }
@@ -32,24 +39,12 @@ public class ToDoTask {
         return this.isDone;
     }
 
-    public String getTitle() {
-        return this.title;
-    }
-
     public Importance getPriority() {
         return this.importance;
     }
 
     public String toString(){
         return "Task title: " + title + ", Status: " + isDone;
-    }
-
-    public Date getDueDate() {
-        return this.dueDate;
-    }
-
-    public void setDueDate(Date dued){
-        this.dueDate = dued;
     }
 
     public boolean isDone()  {

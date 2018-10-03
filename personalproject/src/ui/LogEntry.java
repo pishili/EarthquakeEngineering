@@ -1,6 +1,6 @@
 package ui;
 
-import model.ToDoTask;
+import model.RegularToDoTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,18 +14,18 @@ import java.util.List;
 // [3] show all the items"
 public class LogEntry {
     String operation = "";
-    ArrayList<ToDoTask> tasks = new ArrayList<>();
+    ArrayList<RegularToDoTask> tasks = new ArrayList<>();
     String result = null;
 
     public void setOperation(String operation) {
         this.operation = operation;
     }
 
-    public void addTask(ToDoTask task) {
+    public void addTask(RegularToDoTask task) {
         tasks.add(task);
     }
 
-    public void removeTask(ToDoTask task) {
+    public void removeTask(RegularToDoTask task) {
         tasks.remove(task);
     }
 
@@ -34,12 +34,12 @@ public class LogEntry {
     }
 
     public void printItems(){
-        for (ToDoTask task: tasks){
+        for (RegularToDoTask task: tasks){
             String title = task.getTitle();
         }
     }
 
-    public void addOperand(ToDoTask first) {
+    public void addOperand(RegularToDoTask first) {
     }
 
     public void setResult(List<String> results) {

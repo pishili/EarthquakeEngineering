@@ -1,23 +1,23 @@
 package test;
 
-import model.ToDoTask;
+import model.RegularToDoTask;
 import model.ToDoList;
 
 import java.util.Date;
 
 public class TestToDoList {
-    private ToDoTask t1;
-    private ToDoTask t2;
-    private ToDoTask t3;
-    private ToDoTask t4;
+    private RegularToDoTask t1;
+    private RegularToDoTask t2;
+    private RegularToDoTask t3;
+    private RegularToDoTask t4;
 
     private ToDoList myTasks;
 
     public TestToDoList() {
-        t1 = new ToDoTask("cs221", ToDoTask.Importance.HIGH, new Date());
-        t2 = new ToDoTask("213", ToDoTask.Importance.HIGH, new Date());
-        t3 = new ToDoTask("121", ToDoTask.Importance.HIGH, new Date());
-        t4 = new ToDoTask("210", ToDoTask.Importance.HIGH, new Date());
+        t1 = new RegularToDoTask("cs221", RegularToDoTask.Importance.HIGH, new Date());
+        t2 = new RegularToDoTask("213", RegularToDoTask.Importance.HIGH, new Date());
+        t3 = new RegularToDoTask("121", RegularToDoTask.Importance.HIGH, new Date());
+        t4 = new RegularToDoTask("210", RegularToDoTask.Importance.HIGH, new Date());
 
         myTasks = new ToDoList("MY TASKS");
         myTasks.addTask(t1);

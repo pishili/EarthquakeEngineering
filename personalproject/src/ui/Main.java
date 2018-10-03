@@ -1,6 +1,6 @@
 package ui;
+import model.RegularToDoTask;
 import model.ToDoList;
-import model.ToDoTask;
 
 import java.util.Date;
 
@@ -9,19 +9,19 @@ public class Main {
 
     public static void main(String[] args) {
         new App();
-        ToDoTask task;
+        RegularToDoTask task;
         ToDoList taskarchive = new ToDoList("aList");
 //
 //        ArrayList<LogEntry> operationLog = new ArrayList<>();
 //        Scanner scanner = new Scanner(System.in);
-//        ToDoTask task = new ToDoTask();
+//        RegularToDoTask task = new RegularToDoTask();
 //        ToDoList taskarchive = new ToDoList();
 //
 //        // Create tasks
-        ToDoTask t1 = new ToDoTask("First Task", ToDoTask.Importance.HIGH, new Date());
-        ToDoTask t2 = new ToDoTask("Second Task", ToDoTask.Importance.LOW, new Date());
-        ToDoTask t3 = new ToDoTask("Third Task", ToDoTask.Importance.MEDIUM, new Date());
-        ToDoTask t4 = new ToDoTask("Workout Task", ToDoTask.Importance.HIGH , new Date());
+        RegularToDoTask t1 = new RegularToDoTask("First Task", RegularToDoTask.Importance.HIGH, new Date());
+        RegularToDoTask t2 = new RegularToDoTask("Second Task", RegularToDoTask.Importance.LOW, new Date());
+        RegularToDoTask t3 = new RegularToDoTask("Third Task", RegularToDoTask.Importance.MEDIUM, new Date());
+        RegularToDoTask t4 = new RegularToDoTask("Workout Task", RegularToDoTask.Importance.HIGH , new Date());
 
         // Print tasks
         printTask(t1);
@@ -41,7 +41,7 @@ public class Main {
         printList(l1);
     }
 
-    private static void printTask(ToDoTask task) {
+    private static void printTask(RegularToDoTask task) {
         System.out.println("Called printTask");
         System.out.println(task);
     }

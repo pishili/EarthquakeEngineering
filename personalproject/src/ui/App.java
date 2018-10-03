@@ -1,7 +1,7 @@
 package ui;
 
+import model.RegularToDoTask;
 import model.ToDoList;
-import model.ToDoTask;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,7 +43,7 @@ public class App {
         System.out.println("Please enter your task to be added to your TODO list with its importance and due date");
         String tasktitle = scanner.nextLine();
         String importance = scanner.nextLine();
-        ToDoTask task1 = new ToDoTask(tasktitle, ToDoTask.Importance.MEDIUM, new Date());
+        RegularToDoTask task1 = new RegularToDoTask(tasktitle, RegularToDoTask.Importance.MEDIUM, new Date());
         taskarchive.addTask(task1);
         logEntry.addOperand(task1);
         return tasktitle;
@@ -52,7 +52,7 @@ public class App {
     private String two(LogEntry logEntry) {
         System.out.println("Please enter the title of the task you would like to remove");
         String tasktitle = scanner.nextLine();
-        for (ToDoTask item : taskarchive.getTasks()) {
+        for (RegularToDoTask item : taskarchive.getTasks()) {
             if (item.getTitle() == tasktitle) {
                 taskarchive.removeTask(item);
             }
@@ -63,7 +63,7 @@ public class App {
     private List<String> three(LogEntry logEntry) {
         System.out.println("We will print all your active tasks for you!");
         List<String> list = new ArrayList<>();
-        for (ToDoTask item : taskarchive.getTasks()) {
+        for (RegularToDoTask item : taskarchive.getTasks()) {
             System.out.println(item.getTitle());
             list.add(item.getTitle());
         }

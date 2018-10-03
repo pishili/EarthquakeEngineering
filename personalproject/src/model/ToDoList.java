@@ -8,22 +8,22 @@ public class ToDoList {
     private String name;
     private String status;
     private Date dueDate;
-    private ArrayList<ToDoTask> tasks = new ArrayList<>() ;
+    private ArrayList<RegularToDoTask> tasks = new ArrayList<>() ;
 
 
     public ToDoList(String name) {
         this.name = name;
     }
 
-    public void addTask(ToDoTask task) {
+    public void addTask(RegularToDoTask task) {
         tasks.add(task);
     }
 
-    public void removeTask(ToDoTask task) {
+    public void removeTask(RegularToDoTask task) {
         tasks.remove(task);
     }
 
-    public List<ToDoTask> getTasks() {
+    public List<RegularToDoTask> getTasks() {
         return tasks;
     }
 

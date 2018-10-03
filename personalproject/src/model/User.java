@@ -10,7 +10,7 @@ public class User {
     private final String name;
     private String email;
     private ToDoList list;
-    private ArrayList<ToDoTask> tasks;
+    private ArrayList<RegularToDoTask> tasks;
 
 
     public User(String name, String email) {
