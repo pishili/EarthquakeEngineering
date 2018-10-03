@@ -9,6 +9,7 @@ public abstract class Item implements ToDos {
     Boolean iscomplete;
 
     public Item(){
+        this.iscomplete = true;
 
     }
 
@@ -32,7 +33,7 @@ public abstract class Item implements ToDos {
     public Boolean complete(){
         if (iscomplete) {
             return true;
-        }
+        }return false;
 
     }
 }

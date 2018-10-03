@@ -32,6 +32,12 @@ public class UrgentTask extends Item {
         return super.getDueDate(dueDate);
     }
 
+    @Override
+    public Boolean complete() {
+        System.out.println("Is it complete for Urgent Task?");
+        return super.complete();
+    }
+
     public String getImportance(String urgentImportance){
 //        System.out.println("This task should be completed by Tomorrow");
         return urgentImportance + "should be completed by tomorrow";

@@ -29,6 +29,12 @@ public class RegularToDoTask extends Item {
         return super.getDueDate(dueDate);
     }
 
+    @Override
+    public Boolean complete() {
+        System.out.println("Is it complete?");
+        return super.complete();
+    }
+
     public void setPriority(Importance priority) { this.importance = priority; }
 
     public void setIsDone(Boolean isDone) {
