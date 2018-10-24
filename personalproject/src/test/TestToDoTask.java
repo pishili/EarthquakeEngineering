@@ -9,7 +9,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TestRegularToDoTask {
+public class TestToDoTask {
     private RegularToDoTask task1;
 
 
@@ -70,9 +70,10 @@ public class TestRegularToDoTask {
                     new UrgentTask("task" + i, new Date())
                 );
             }
-            fail("Adding too many tasks did not throw an exception. This should fail!");
+            fail("Adding too many tasks did not Compile the addUrgentTask. This should fail!");
         } catch (TooManyUrgentThingsToDo e) {
             // Do nothing. It's correct to throw exception here when adding tasks when many are not done yet
+            System.out.println("Catch the Too Many Tasks have been added");
         }
     }
 
