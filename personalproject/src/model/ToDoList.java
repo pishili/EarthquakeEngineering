@@ -16,11 +16,16 @@ public class ToDoList {
 
     public ToDoList() {
         this.title = title;
-        regularTask = new RegularToDoTask(title, RegularToDoTask.Importance.HIGH, dueDate);
-        urgentTask = new UrgentTask(title, dueDate);
         regulartasks= new ArrayList<>();
         urgenttasks = new ArrayList<>();
-}
+    }
+
+    public
+    ToDoList(String my_tasks) {
+        this.title = title;
+        regulartasks= new ArrayList<>();
+        urgenttasks = new ArrayList<>();
+    }
 
     public void addRegularTask(RegularToDoTask task) {
         regulartasks.add(task);
@@ -38,12 +43,12 @@ public class ToDoList {
         urgenttasks.remove(task);
     }
 
+//    public ArrayList<RegularToDoTask> getRegTasks() {
+//        return getRegTasks(regularTask);
+//    }
+
     public ArrayList<RegularToDoTask> getRegTasks() {
         return regulartasks;
-    }
-
-    public ArrayList<UrgentTask> getRegTasks() {
-        return urgenttasks;
     }
 
     public void setName(){

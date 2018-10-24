@@ -7,7 +7,10 @@ public class RegularToDoTask extends Item {
     private String category;
 
 
-    public RegularToDoTask(String title, Importance high, Date dueDate) {
+    public RegularToDoTask(String title, Importance importance, Date dueDate) {
+        this.title = title;
+        this.importance = importance;
+        this.dueDate = dueDate;
         this.iscomplete = false;
     }
 

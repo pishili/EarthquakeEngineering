@@ -28,6 +28,10 @@ public abstract class Item implements ToDos, Prioritizable {
         return this.title;
     }
 
+    public Importance getImportance() {
+        return this.importance;
+    }
+
     public void setDueDate(Date dued){
         this.dueDate = dued;
     }

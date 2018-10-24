@@ -54,7 +54,7 @@ public class App {
         String tasktitle = scanner.nextLine();
         for (RegularToDoTask item : taskarchive.getRegTasks()) {
             if (item.getTitle() == tasktitle) {
-                taskarchive.getRegTasks(item);
+                taskarchive.addRegularTask(item);
             }
         }
         return tasktitle;
