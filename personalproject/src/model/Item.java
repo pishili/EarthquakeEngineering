@@ -10,7 +10,7 @@ public abstract class Item implements ToDos, Prioritizable {
     protected Importance importance;
 
     public Item(){
-        this.iscomplete = true;
+        this.iscomplete = false;
 
     }
 

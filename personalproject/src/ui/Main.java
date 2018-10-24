@@ -3,6 +3,7 @@ package ui;
 import model.Prioritizable;
 import model.RegularToDoTask;
 import model.ToDoList;
+import model.TooManyThingsToDo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,7 +54,12 @@ public class Main {
 
     private static void readFile() throws IOException {
 
-        List<String> lines = Files.readAllLines(Paths.get("my_tasks.txt"));
+        List<String> lines = new ArrayList<>();
+        try {
+            lines = Files.readAllLines(Paths.get("my_tasks.txt"));
+        } catch (IOException e) {
+            System.out.println("Could not find my_tasks.txt! Not adding any tasks");
+        }
 
         for (String line : lines) {
             ArrayList<String> partsOfLine = splitOnSpace(line);
@@ -61,7 +67,13 @@ public class Main {
             System.out.println("Status: " + partsOfLine.get(1));
 
             RegularToDoTask task = new RegularToDoTask(partsOfLine.get(0), Prioritizable.Importance.LOW, new Date());
-            taskarchive.addRegularTask(task);
+            try {
+                taskarchive.addRegularTask(task);
+            } catch (TooManyThingsToDo tooManyThingsToDo) {
+                System.out.println("Could not add task, due to many being not done");
+            } finally {
+                System.out.println("Reached finally clause");
+            }
         }
     }
 
@@ -76,9 +88,29 @@ public class Main {
         ToDoList l1 = new ToDoList("CS Tasks");
 
         //Add items to list
-        l1.addRegularTask(t1);
-        l1.addRegularTask(t2);
-        l1.addRegularTask(t3);
+        try {
+            taskarchive.addRegularTask(t1);
+        } catch (TooManyThingsToDo tooManyThingsToDo) {
+            System.out.println("Could not add task, due to many being not done");
+        } finally {
+            System.out.println("Reached finally clause");
+        }
+
+        try {
+            taskarchive.addRegularTask(t2);
+        } catch (TooManyThingsToDo tooManyThingsToDo) {
+            System.out.println("Could not add task, due to many being not done");
+        } finally {
+            System.out.println("Reached finally clause");
+        }
+
+        try {
+            taskarchive.addRegularTask(t3);
+        } catch (TooManyThingsToDo tooManyThingsToDo) {
+            System.out.println("Could not add task, due to many being not done");
+        } finally {
+            System.out.println("Reached finally clause");
+        }
 
         try (PrintWriter writer = new PrintWriter("output.txt", "UTF-8")) {
             for(RegularToDoTask task: l1.getRegTasks()) {

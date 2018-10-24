@@ -7,11 +7,9 @@ public class UrgentTask extends Item {
     private String urgentImportance;
     private Long id;
     private String category;
-    private Boolean isDone;
     private Date dueDate;
 
     public UrgentTask(String title, Date dueDate) {
-        this.isDone = false;
         this.dueDate = dueDate;
         importance = Importance.HIGH;
     }
@@ -33,6 +31,10 @@ public class UrgentTask extends Item {
     public Boolean complete() {
         System.out.println("Is it complete for Urgent Task?");
         return super.complete();
+    }
+
+    public boolean isDone()  {
+        return iscomplete;
     }
 
     @Override

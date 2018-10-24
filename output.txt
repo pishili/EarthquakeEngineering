@@ -1,3 +1,0 @@
-First_Task HIGH
-Second_Task LOW
-Third_Task MEDIUM

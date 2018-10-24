@@ -2,6 +2,7 @@ package ui;
 
 import model.RegularToDoTask;
 import model.ToDoList;
+import model.TooManyThingsToDo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,7 +45,13 @@ public class App {
         String tasktitle = scanner.nextLine();
         String importance = scanner.nextLine();
         RegularToDoTask task1 = new RegularToDoTask(tasktitle, RegularToDoTask.Importance.MEDIUM, new Date());
-        taskarchive.addRegularTask(task1);
+        try {
+            taskarchive.addRegularTask(task1);
+        } catch (TooManyThingsToDo tooManyThingsToDo) {
+            System.out.println("Could not add task, due to many being not done");
+        } finally {
+            System.out.println("Reached finally clause");
+        }
         logEntry.addOperand(task1);
         return tasktitle;
     }
@@ -54,7 +61,13 @@ public class App {
         String tasktitle = scanner.nextLine();
         for (RegularToDoTask item : taskarchive.getRegTasks()) {
             if (item.getTitle() == tasktitle) {
-                taskarchive.addRegularTask(item);
+                try {
+                    taskarchive.addRegularTask(item);
+                } catch (TooManyThingsToDo tooManyThingsToDo) {
+                    System.out.println("Could not add task, due to many being not done");
+                } finally {
+                    System.out.println("Reached finally clause");
+                }
             }
         }
         return tasktitle;

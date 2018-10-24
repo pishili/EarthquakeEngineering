@@ -20,18 +20,48 @@ public class ToDoList {
         urgenttasks = new ArrayList<>();
     }
 
-    public
-    ToDoList(String my_tasks) {
+    public ToDoList(String my_tasks) {
         this.title = title;
         regulartasks= new ArrayList<>();
         urgenttasks = new ArrayList<>();
     }
 
-    public void addRegularTask(RegularToDoTask task) {
+    public void addRegularTask(RegularToDoTask task) throws TooManyRegularThingsToDo {
+        // Throw exception if too many not done tasks
+        if (getCountOfNotDoneRegularTasks() >= 5) {
+            throw new TooManyRegularThingsToDo();
+        }
+
         regulartasks.add(task);
     }
 
-    public void addUrgentTask(UrgentTask task) {
+    private int getCountOfNotDoneRegularTasks() {
+        // Count not done tasks
+        int notDoneCount = 0;
+        for (RegularToDoTask task: regulartasks) {
+            if (!task.isDone()) {
+                notDoneCount++;
+            }
+        }
+        return notDoneCount;
+    }
+
+    private int getCountOfNotDoneUrgentTasks() {
+        // Count not done tasks
+        int notDoneCount = 0;
+        for (UrgentTask task: urgenttasks) {
+            if (!task.isDone()) {
+                notDoneCount++;
+            }
+        }
+        return notDoneCount;
+    }
+
+    public void addUrgentTask(UrgentTask task) throws TooManyUrgentThingsToDo {
+        // Throw exception if too many not done tasks
+        if (getCountOfNotDoneUrgentTasks() >= 2) {
+            throw new TooManyUrgentThingsToDo();
+        }
         urgenttasks.add(task);
     }
 
