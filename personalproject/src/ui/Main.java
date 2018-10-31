@@ -113,7 +113,7 @@ public class Main {
         }
 
         try (PrintWriter writer = new PrintWriter("output.txt", "UTF-8")) {
-            for(RegularToDoTask task: l1.getRegTasks()) {
+            for(RegularToDoTask task: l1.getRegTasks().values()) {
                 writer.write(task.getTitle() + " " + task.getImportance() + "\n");
             }
         }

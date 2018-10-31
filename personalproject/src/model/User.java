@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -10,7 +9,8 @@ public class User {
     private final String name;
     private String email;
     private ToDoList list;
-    private ArrayList<RegularToDoTask> tasks;
+//    private ArrayList<RegularToDoTask> tasks;
+    private ToDoList tasks;
 
 
     public User(String name, String email) {
@@ -35,9 +35,7 @@ public class User {
     }
 
     public static void setUserEmails(List<String> userEmailz) {
-        userEmails = userEmailz;
+        userEmails = userEmails;
     }
-
-
 
 }

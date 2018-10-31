@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestToDoTask {
     private RegularToDoTask task1;
@@ -41,6 +40,7 @@ public class TestToDoTask {
                     new RegularToDoTask("task" + i, RegularToDoTask.Importance.HIGH, new Date())
                 );
             }
+            System.out.println(toDoList);
             fail("Adding too many tasks did not throw an exception");
         } catch (TooManyRegularThingsToDo e) {
             // Do nothing. It's correct to throw exception here when adding tasks when many are not done yet
@@ -89,5 +89,24 @@ public class TestToDoTask {
         } catch (TooManyUrgentThingsToDo e) {
             fail("We should not throw an exception when number of not done tasks did not reach > 2");
         }
+    }
+
+    @Test
+    public void testEqualTrue(){
+        RegularToDoTask task1 = new RegularToDoTask("review meeting", RegularToDoTask.Importance.HIGH, new Date());
+        RegularToDoTask task2 = new RegularToDoTask("review meeting", RegularToDoTask.Importance.HIGH, new Date());
+        assertEquals(task1, task2);
+    }
+
+    @Test
+    public void testEqualFalse(){
+        // Just changing the name of tasks shoudld be enough
+        RegularToDoTask task1 = new RegularToDoTask("review meeting", RegularToDoTask.Importance.HIGH, new Date());
+        RegularToDoTask task2 = new RegularToDoTask("review meeting2", RegularToDoTask.Importance.HIGH, new Date());
+        assertNotEquals(task1, task2);
+
+        task1 = new RegularToDoTask("review meeting", RegularToDoTask.Importance.HIGH, new Date());
+        task2 = new RegularToDoTask("review meeting", RegularToDoTask.Importance.LOW, new Date());
+        assertNotEquals(task1, task2);
     }
 }

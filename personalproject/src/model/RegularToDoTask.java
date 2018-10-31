@@ -1,11 +1,28 @@
 package model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class RegularToDoTask extends Item {
 
     private String category;
+    private ToDoList toDoList;
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        RegularToDoTask that = (RegularToDoTask) o;
+        return Objects.equals(category, that.category);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), category);
+    }
 
     public RegularToDoTask(String title, Importance importance, Date dueDate) {
         this.title = title;
@@ -50,6 +67,9 @@ public class RegularToDoTask extends Item {
         return iscomplete;
     }
 
+    public void setToDoList(ToDoList toDoList) {
+        this.toDoList = toDoList;
+    }
 
 }
 
