@@ -9,6 +9,9 @@ public abstract class ToDoList {
     private String title;
     private String status;
     private Date dueDate;
+    private ToDoListRegularTask todoReglist;
+    private ToDoListUrgentTask todoUrgelist;
+
 //    RegularToDoTask regularTask;
 //    UrgentTask urgentTask;
 //    private Set<RegularToDoTask> regulartasks;
@@ -18,6 +21,8 @@ public abstract class ToDoList {
 
     public ToDoList() {
         this.title = title;
+        todoReglist = new ToDoListRegularTask();
+        todoUrgelist = new ToDoListUrgentTask();
     }
 
     public ToDoList(String my_tasks) {
@@ -35,6 +40,8 @@ public abstract class ToDoList {
 //        Date date1 = sdf.parse("20012-10-4 10:15:25");
     }
 
+
+
 //    @Override
 //    public String toString() {
 //        String result = "ToDoList Title: " + name + "\n";
@@ -43,17 +50,9 @@ public abstract class ToDoList {
 //        return result;
 //    }
 
-//    public void addRegularTask(RegularToDoTask task) throws TooManyRegularThingsToDo {
-//        // Throw exception if too many not done tasks
-//        if (getCountOfNotDoneRegularTasks() >= 5) {
-//            throw new TooManyRegularThingsToDo();
-//        }
-//
-//        if(!regularTasks.containsKey(task.title)) {
-//            regularTasks.put(task.title, task);
-//            task.setToDoList(this);
-//        }
-//    }
+    public void addRegularTask(RegularToDoTask task) throws TooManyRegularThingsToDo {
+        todoReglist.add
+    }
 
 //    public void addUrgentTask(UrgentTask task) throws TooManyUrgentThingsToDo {
 //        // Throw exception if too many not done tasks
