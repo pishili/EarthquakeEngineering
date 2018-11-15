@@ -1,8 +1,10 @@
 package model;
 
+import services.Earthquake;
+
 import java.util.List;
 
-public class User {
+public class User implements EarthquakeObserver {
 
     public static List<String> userEmails;
 
@@ -36,6 +38,18 @@ public class User {
 
     public static void setUserEmails(List<String> userEmailz) {
         userEmails = userEmails;
+    }
+
+    @Override
+    public void update(Earthquake earthquake) {
+        System.out.println("Urgent Alert: Earthquake within depth of  " + earthquake.getDepth() + "meters " + "happened within magnitude of " + earthquake.getMagnitude() + "Richters" );
+
+//        User urgentEarthAlertSubscriber = (User)  o;
+//        System.out.println(o.getName());
+//
+//        String message = (String) arg;
+//        System.out.println(message);
+
     }
 
 }

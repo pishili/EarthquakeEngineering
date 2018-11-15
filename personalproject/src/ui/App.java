@@ -1,6 +1,7 @@
 package ui;
 
-import model.RegularToDoTask;
+import model.Prioritizable;
+import model.Task;
 import model.ToDoList;
 import model.TooManyThingsToDo;
 
@@ -41,12 +42,12 @@ public class App {
     }
 
     private String one(LogEntry logEntry) {
-        System.out.println("Please enter your task to be added to your TODO list with its importance and due date");
+        System.out.println("Please enter your task to be added to your TODO list with its priority and due date");
         String tasktitle = scanner.nextLine();
         String importance = scanner.nextLine();
-        RegularToDoTask task1 = new RegularToDoTask(tasktitle, RegularToDoTask.Importance.MEDIUM, new Date());
+        Task task1 = new Task(tasktitle, Prioritizable.Priority.MEDIUM, new Date());
         try {
-            taskarchive.addRegularTask(task1);
+            taskarchive.addTask(task1);
         } catch (TooManyThingsToDo tooManyThingsToDo) {
             System.out.println("Could not add task, due to many being not done");
         } finally {
@@ -59,10 +60,10 @@ public class App {
     private String two(LogEntry logEntry) {
         System.out.println("Please enter the title of the task you would like to remove");
         String tasktitle = scanner.nextLine();
-        for (RegularToDoTask item : taskarchive.getRegTasks().values()) {
+        for (Task item : taskarchive.getRegTasks().values()) {
             if (item.getTitle() == tasktitle) {
                 try {
-                    taskarchive.addRegularTask(item);
+                    taskarchive.addTask(item);
                 } catch (TooManyThingsToDo tooManyThingsToDo) {
                     System.out.println("Could not add task, due to many being not done");
                 } finally {
@@ -76,7 +77,7 @@ public class App {
     private List<String> three(LogEntry logEntry) {
         System.out.println("We will print all your active tasks for you!");
         List<String> list = new ArrayList<>();
-        for (RegularToDoTask item : taskarchive.getRegTasks().values()) {
+        for (Task item : taskarchive.getRegTasks().values()) {
             System.out.println(item.getTitle());
             list.add(item.getTitle());
         }

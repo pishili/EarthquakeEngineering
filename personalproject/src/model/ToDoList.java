@@ -4,63 +4,33 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-// add n
-public abstract class ToDoList {
+public class ToDoList {
     private String name;
     private String title;
     private String status;
     private Date dueDate;
-    private ToDoListRegularTask todoReglist;
-    private ToDoListUrgentTask todoUrgelist;
-
-    RegularToDoTask regularTask;
-    UrgentTask urgentTask;
-    private Set<RegularToDoTask> regulartasks;
-    private Set<UrgentTask> urgenttasks ;
-    private Map<String, RegularToDoTask> regularTasks = new HashMap<>();
-    private Map<String, UrgentTask> urgentTasks = new HashMap<>();
+    private Map<String, Task> tasks = new HashMap<>();
 
     public ToDoList() {
         this.title = title;
-        todoReglist = new ToDoListRegularTask();
-        todoUrgelist = new ToDoListUrgentTask();
     }
 
     public ToDoList(String my_tasks) {
         this.title = title;
     }
 
-    public void setName(){
-        this.name = name;
-    }
-
-    public boolean getStatus(){ return status; }
-
-    public void dueDate() {
-        this.dueDate = dueDate;
-//        Date date1 = sdf.parse("20012-10-4 10:15:25");
-    }
-
-    @Override
-    public String toString() {
-        String result = "ToDoList Title: " + name + "\n";
-        result += urgentTasks.values().toString();
-        result += regularTasks.values().toString();
-        return result;
-    }
-
-    public void addRegularTask(RegularToDoTask task) throws TooManyRegularThingsToDo {
-        regularTasks.addRegTask()
-    }
-
-    public void addUrgentTask(UrgentTask task) throws TooManyUrgentThingsToDo {
+    public void addTask(Task task) throws TooManyRegularThingsToDo, TooManyUrgentThingsToDo {
         // Throw exception if too many not done tasks
-        if(getCountOfNotDoneUrgentTasks() >= 2) {
+        if (task.getPriority() != Prioritizable.Priority.HIGH && getCountOfNotDoneRegularTasks() >= 5) {
+            throw new TooManyRegularThingsToDo();
+        }
+
+        if (task.getPriority() == Prioritizable.Priority.HIGH && getCountOfNotDoneUrgentTasks() >= 2) {
             throw new TooManyUrgentThingsToDo();
         }
 
-        if(!urgentTasks.containsKey(task.title)) {
-            urgentTasks.put(task.title, task);
+        if(!tasks.containsKey(task.title)) {
+            tasks.put(task.title, task);
             task.setToDoList(this);
         }
     }
@@ -68,7 +38,7 @@ public abstract class ToDoList {
     private int getCountOfNotDoneRegularTasks() {
         // Count not done tasks
         int notDoneCount = 0;
-        for (RegularToDoTask task: regularTasks.values()) {
+        for (Task task: getRegTasks().values()) {
             if (!task.isDone()) {
                 notDoneCount++;
             }
@@ -79,7 +49,7 @@ public abstract class ToDoList {
     private int getCountOfNotDoneUrgentTasks() {
         // Count not done tasks
         int notDoneCount = 0;
-        for (UrgentTask task: urgentTasks.values()) {
+        for (Task task: getUrgentTasks().values()) {
             if (!task.isDone()) {
                 notDoneCount++;
             }
@@ -87,20 +57,49 @@ public abstract class ToDoList {
         return notDoneCount;
     }
 
-    public void removeRegTask(RegularToDoTask task) {
-        regularTasks.remove(task.title);
+    public void removeTask(Task task) {
+        tasks.remove(task.title);
     }
 
-    public void removeUrgTask(UrgentTask task) {
-        urgentTasks.remove(task.title);
+
+    public Map<String, Task> getRegTasks() {
+        Map<String, Task> regTasks = new HashMap<>();
+        for (Map.Entry<String, Task> task : tasks.entrySet()) {
+            if (task.getValue().getPriority() != Prioritizable.Priority.HIGH) {
+                regTasks.put(task.getKey(), task.getValue());
+            }
+        }
+        return regTasks;
     }
 
-    public ArrayList<RegularToDoTask> getRegTasks() {
-        return getRegTasks(regularTask);
+    public Map<String, Task> getUrgentTasks() {
+        Map<String, Task> regTasks = new HashMap<>();
+        for (Map.Entry<String, Task> task : tasks.entrySet()) {
+            if (task.getValue().getPriority() == Prioritizable.Priority.HIGH) {
+                regTasks.put(task.getKey(), task.getValue());
+            }
+        }
+        return regTasks;
     }
 
-    public Map<String, RegularToDoTask> getRegTasks() {
-        return regularTasks;
+    public void setName(){
+        this.name = name;
     }
-    public Map<String, UrgentTask> getUrgTasks() { return urgentTasks; }
+
+    public boolean getStatus(){
+        // Todo
+        return false;
+    }
+
+    public void dueDate(){
+        this.dueDate = dueDate;
+//        Date date1 = sdf.parse("20012-10-4 10:15:25");
+    }
+
+    @Override
+    public String toString() {
+        String result = "ToDoList Title: " + name + "\n";
+        result += tasks.values().toString();
+        return result;
+    }
 }

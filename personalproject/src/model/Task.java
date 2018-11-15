@@ -3,15 +3,22 @@ package model;
 import java.util.Date;
 import java.util.Objects;
 
-public abstract class Item implements ToDos, Prioritizable {
+public class Task implements ToDos, Prioritizable {
     protected String title;
     protected Long id;
     protected Date dueDate;
     protected Boolean iscomplete;
-    protected Importance importance;
+    protected Priority priority;
     private ToDoList toDoList;
 
-    public Item(){
+    public Task(){
+        this.iscomplete = false;
+    }
+
+    public Task(String title, Priority priority, Date dueDate) {
+        this.title = title;
+        this.priority = priority;
+        this.dueDate = dueDate;
         this.iscomplete = false;
     }
 
@@ -21,7 +28,8 @@ public abstract class Item implements ToDos, Prioritizable {
         this.dueDate = mydueDate;
     }
 
-    public ToDoList getToDoList() {
+    public
+    ToDoList getToDoList() {
         return this.toDoList;
     }
 
@@ -29,16 +37,18 @@ public abstract class Item implements ToDos, Prioritizable {
         this.toDoList = toDoList;
     }
 
-    public Importance getPriority() {
-        return this.importance;
+    @Override
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public String getTitle() {
         return this.title;
     }
 
-    public Importance getImportance() {
-        return this.importance;
+    public
+    Priority getPriority() {
+        return this.priority;
     }
 
     public void setDueDate(Date dued){
@@ -53,23 +63,27 @@ public abstract class Item implements ToDos, Prioritizable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return Objects.equals(title, item.title) &&
-                Objects.equals(id, item.id) &&
-                importance == item.importance;
+        Task task = (Task) o;
+        return Objects.equals(title, task.title) &&
+                Objects.equals(id, task.id) &&
+                priority == task.priority;
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(title, id, importance);
+        return Objects.hash(title, id, priority);
     }
 
-    public Boolean complete(){
+    public Boolean isDone() {
+        return this.iscomplete;
+    }
 
-        if (iscomplete) {
-            return true;
-        }return false;
+    public void setIsDone(Boolean isDone) {
+        this.iscomplete = isDone;
+    }
 
+    public Boolean getIsDone() {
+        return this.iscomplete;
     }
 }

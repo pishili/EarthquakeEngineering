@@ -2,14 +2,14 @@ package model;
 
 public interface Prioritizable {
 
-    enum Importance {
+    enum Priority {
         HIGH,
         MEDIUM,
         LOW
     }
 
-    Importance getPriority();
+    Priority getPriority();
 
-    void setPriority(Importance priority);
+    void setPriority(Priority priority);
 
 }
