@@ -1,0 +1,20 @@
+<application>
+  <component name="FileTypeManager" version="17">
+    <extensionMap>
+      <mapping pattern="Person" type="PLAIN_TEXT" />
+      <mapping pattern="machine_learning" type="PLAIN_TEXT" />
+      <mapping pattern="TODOLSep3.md" type="PLAIN_TEXT" />
+      <mapping pattern="bokeh_line" type="PLAIN_TEXT" />
+      <mapping pattern="close sidebar webwork/2018w1_stat200_101/takehome-activity-oct-10/1 TakeHome-Activity-Oct-10: Problem 1" type="PLAIN_TEXT" />
+      <mapping pattern="my_tasks" type="PLAIN_TEXT" />
+      <mapping pattern="CS340_Sep10_2018" type="PLAIN_TEXT" />
+      <mapping pattern="CS340_Sep12_2018" type="PLAIN_TEXT" />
+      <mapping pattern="cake" type="PLAIN_TEXT" />
+      <mapping pattern="macos" type="PLAIN_TEXT" />
+      <mapping pattern="starter" type="PLAIN_TEXT" />
+      <mapping pattern="Ali_Video_2018_Jan_Midterm_Practice.md" type="PLAIN_TEXT" />
+      <mapping ext="conf" type="PLAIN_TEXT" />
+      <mapping ext="ms" type="PLAIN_TEXT" />
+    </extensionMap>
+  </component>
+</application>
