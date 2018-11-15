@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+// add new
 public abstract class ToDoList {
     private String name;
     private String title;
@@ -12,12 +13,12 @@ public abstract class ToDoList {
     private ToDoListRegularTask todoReglist;
     private ToDoListUrgentTask todoUrgelist;
 
-//    RegularToDoTask regularTask;
-//    UrgentTask urgentTask;
-//    private Set<RegularToDoTask> regulartasks;
-//    private Set<UrgentTask> urgenttasks ;
-//    private Map<String, RegularToDoTask> regularTasks = new HashMap<>();
-//    private Map<String, UrgentTask> urgentTasks = new HashMap<>();
+    RegularToDoTask regularTask;
+    UrgentTask urgentTask;
+    private Set<RegularToDoTask> regulartasks;
+    private Set<UrgentTask> urgenttasks ;
+    private Map<String, RegularToDoTask> regularTasks = new HashMap<>();
+    private Map<String, UrgentTask> urgentTasks = new HashMap<>();
 
     public ToDoList() {
         this.title = title;
@@ -40,68 +41,66 @@ public abstract class ToDoList {
 //        Date date1 = sdf.parse("20012-10-4 10:15:25");
     }
 
-
-
-//    @Override
-//    public String toString() {
-//        String result = "ToDoList Title: " + name + "\n";
-//        result += urgentTasks.values().toString();
-//        result += regularTasks.values().toString();
-//        return result;
-//    }
-
-    public void addRegularTask(RegularToDoTask task) throws TooManyRegularThingsToDo {
-        todoReglist.add
+    @Override
+    public String toString() {
+        String result = "ToDoList Title: " + name + "\n";
+        result += urgentTasks.values().toString();
+        result += regularTasks.values().toString();
+        return result;
     }
 
-//    public void addUrgentTask(UrgentTask task) throws TooManyUrgentThingsToDo {
-//        // Throw exception if too many not done tasks
-//        if(getCountOfNotDoneUrgentTasks() >= 2) {
-//            throw new TooManyUrgentThingsToDo();
-//        }
-//
-//        if(!urgentTasks.containsKey(task.title)) {
-//            urgentTasks.put(task.title, task);
-//            task.setToDoList(this);
-//        }
-//    }
+    public void addRegularTask(RegularToDoTask task) throws TooManyRegularThingsToDo {
+        regularTasks.addRegTask()
+    }
 
-//    private int getCountOfNotDoneRegularTasks() {
-//        // Count not done tasks
-//        int notDoneCount = 0;
-//        for (RegularToDoTask task: regularTasks.values()) {
-//            if (!task.isDone()) {
-//                notDoneCount++;
-//            }
-//        }
-//        return notDoneCount;
-//    }
+    public void addUrgentTask(UrgentTask task) throws TooManyUrgentThingsToDo {
+        // Throw exception if too many not done tasks
+        if(getCountOfNotDoneUrgentTasks() >= 2) {
+            throw new TooManyUrgentThingsToDo();
+        }
 
-//    private int getCountOfNotDoneUrgentTasks() {
-//        // Count not done tasks
-//        int notDoneCount = 0;
-//        for (UrgentTask task: urgentTasks.values()) {
-//            if (!task.isDone()) {
-//                notDoneCount++;
-//            }
-//        }
-//        return notDoneCount;
-//    }
+        if(!urgentTasks.containsKey(task.title)) {
+            urgentTasks.put(task.title, task);
+            task.setToDoList(this);
+        }
+    }
 
-//    public void removeRegTask(RegularToDoTask task) {
-//        regularTasks.remove(task.title);
-//    }
-//
-//    public void removeUrgTask(UrgentTask task) {
-//        urgentTasks.remove(task.title);
-//    }
+    private int getCountOfNotDoneRegularTasks() {
+        // Count not done tasks
+        int notDoneCount = 0;
+        for (RegularToDoTask task: regularTasks.values()) {
+            if (!task.isDone()) {
+                notDoneCount++;
+            }
+        }
+        return notDoneCount;
+    }
 
-//    public ArrayList<RegularToDoTask> getRegTasks() {
-//        return getRegTasks(regularTask);
-//    }
+    private int getCountOfNotDoneUrgentTasks() {
+        // Count not done tasks
+        int notDoneCount = 0;
+        for (UrgentTask task: urgentTasks.values()) {
+            if (!task.isDone()) {
+                notDoneCount++;
+            }
+        }
+        return notDoneCount;
+    }
 
-//    public Map<String, RegularToDoTask> getRegTasks() {
-//        return regularTasks;
-//    }
-//    public Map<String, UrgentTask> getUrgTasks() { return urgentTasks; }
+    public void removeRegTask(RegularToDoTask task) {
+        regularTasks.remove(task.title);
+    }
+
+    public void removeUrgTask(UrgentTask task) {
+        urgentTasks.remove(task.title);
+    }
+
+    public ArrayList<RegularToDoTask> getRegTasks() {
+        return getRegTasks(regularTask);
+    }
+
+    public Map<String, RegularToDoTask> getRegTasks() {
+        return regularTasks;
+    }
+    public Map<String, UrgentTask> getUrgTasks() { return urgentTasks; }
 }
