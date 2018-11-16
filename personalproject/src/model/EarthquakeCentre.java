@@ -2,6 +2,7 @@ package model;
 
 import services.Earthquake;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,6 @@ public class EarthquakeCentre extends Subject {
                 notifyObservers(e);
             }
         }
-
     }
 }
 
