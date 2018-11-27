@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
+
 public
 class GUI {
     private JFrame mainFrame;
@@ -19,6 +20,8 @@ class GUI {
     private JComboBox earthquakeMagnitude;
     private JComboBox earthquakePeriod;
     private JList<Earthquake> earthquakeList;
+    private ImageIcon imageIcon;
+    private JLabel mapJLabel;
 
     public
     GUI() {
@@ -36,7 +39,7 @@ class GUI {
     void prepareGui() {
         // Main Frame
         mainFrame = new JFrame("Earthquake Monitor");
-        mainFrame.setSize(900, 900);
+        mainFrame.setSize(1000, 800);
         mainFrame.setLayout(new GridLayout(4, 1));
 
         // Magnitude selection panel
@@ -74,10 +77,6 @@ class GUI {
         // Bottom label
         bottomLabel.setSize(350, 100);
 
-        // Add items to main frame
-        mainFrame.add(magnitudeSelectorPanel);
-        mainFrame.add(bottomLabel);
-
         // Earthquake Selection Panel
         JPanel earthquakeSelectionPanel = new JPanel();
         earthquakeList = new JList(earthquakeModel);
@@ -90,6 +89,12 @@ class GUI {
         earthquakeSelectionPanel.add(listScrollPane);
         earthquakeSelectionPanel.add(showButton);
 
+        // Map Image
+        imageIcon = new ImageIcon((new ImageIcon("image.jpg"))
+                .getImage().getScaledInstance(630, 600,
+                        java.awt.Image.SCALE_SMOOTH));
+        mapJLabel = new JLabel(imageIcon);
+
         // Bottom label
         bottomLabel = new JLabel("", JLabel.CENTER);
         bottomLabel.setSize(350, 100);
@@ -97,6 +102,7 @@ class GUI {
         // Add items to main frame
         mainFrame.add(magnitudeSelectorPanel);
         mainFrame.add(earthquakeSelectionPanel);
+        mainFrame.add(mapJLabel);
         mainFrame.add(bottomLabel);
     }
 
@@ -131,7 +137,16 @@ class GUI {
             if (earthquakeList.getSelectedValue() == null) {
                 JOptionPane.showMessageDialog(mainFrame, "Please select an earthquake first", "Oops", ERROR_MESSAGE);
             } else {
-                bottomLabel.setText("Clicked Show: " + earthquakeList.getSelectedValue());
+                Earthquake earthquake = earthquakeList.getSelectedValue();
+                GoogleMapAPI googleMapAPI = new GoogleMapAPI();
+                googleMapAPI.getImageURL(earthquake.getLatitude().toString(), earthquake.getlongitude().toString());
+                imageIcon = new ImageIcon((new ImageIcon("image.jpg"))
+                        .getImage().getScaledInstance(700, 700,
+                                java.awt.Image.SCALE_SMOOTH));
+                // mapJLabel = new JLabel(imageIcon);
+                mapJLabel.setIcon(imageIcon);
+
+                bottomLabel.setText("Clicked Show: " + earthquake);
             }
         }
     }

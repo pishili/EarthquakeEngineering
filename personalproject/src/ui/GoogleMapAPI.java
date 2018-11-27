@@ -18,10 +18,16 @@ public class GoogleMapAPI {
                     + ","
                     + longitude
                     + "&size=600x600"
-                    + "&zoom=13"
+                    + "&zoom=5"
+                    + "&markers=color:red%7Clabel:S%7C"
+                    + latitude
+                    + ","
+                    + longitude
                     // change to sattelite map
                     + "&key=AIzaSyCcYrfTKZz2qXMLfn2EbllCCWQf_9CW74A";
             destinationFile = "image.jpg";
+
+            System.out.println(imageUrl);
 
             // read the map image from Google
             // then save it to a local file: image.jpg
