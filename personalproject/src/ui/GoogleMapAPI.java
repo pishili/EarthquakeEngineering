@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class GoogleMapAPI {
 
-    public String getImageURL(String latitude, String longitude) {
+    public String getImageURL(String latitude, String longitude, String markerColor) {
         String destinationFile = null;
         try {
             // change the numbers based on the centre of the screen
@@ -19,7 +19,9 @@ public class GoogleMapAPI {
                     + longitude
                     + "&size=600x600"
                     + "&zoom=5"
-                    + "&markers=color:red%7Clabel:S%7C"
+                    + "&markers=color:"
+                    +  markerColor
+                    + "%7Clabel:S%7C"
                     + latitude
                     + ","
                     + longitude

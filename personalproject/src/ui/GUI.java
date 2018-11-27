@@ -134,12 +134,16 @@ class GUI {
     class ShowButtonClickListener implements ActionListener {
         public
         void actionPerformed(ActionEvent e) {
+            String color;
             if (earthquakeList.getSelectedValue() == null) {
                 JOptionPane.showMessageDialog(mainFrame, "Please select an earthquake first", "Oops", ERROR_MESSAGE);
             } else {
                 Earthquake earthquake = earthquakeList.getSelectedValue();
+
+
+
                 GoogleMapAPI googleMapAPI = new GoogleMapAPI();
-                googleMapAPI.getImageURL(earthquake.getLatitude().toString(), earthquake.getlongitude().toString());
+                googleMapAPI.getImageURL(earthquake.getLatitude().toString(), earthquake.getlongitude().toString(), getMarkerColorWithMagnitude(earthquake));
                 imageIcon = new ImageIcon((new ImageIcon("image.jpg"))
                         .getImage().getScaledInstance(700, 700,
                                 java.awt.Image.SCALE_SMOOTH));
@@ -147,8 +151,23 @@ class GUI {
                 mapJLabel.setIcon(imageIcon);
 
                 bottomLabel.setText("Clicked Show: " + earthquake);
+
             }
         }
-    }
 
+        public String getMarkerColorWithMagnitude(Earthquake e) {
+            String color = null;
+            Earthquake earthquake = earthquakeList.getSelectedValue();
+            if (e.getMagnitude()<3) {
+                color = "green";
+            } else if(e.getMagnitude()<4 ) {
+                color = "yellow";
+            } else if(e.getMagnitude()<5 ) {
+                color = "orange";
+            } else {
+                color = "red";
+            }
+            return color;
+        }
+    }
 }
