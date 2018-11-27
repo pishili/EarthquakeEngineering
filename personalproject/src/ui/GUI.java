@@ -15,7 +15,8 @@ class GUI {
     private JLabel bottomLabel = new JLabel("", JLabel.CENTER);;
     private DefaultListModel earthquakeModel = new DefaultListModel();
     private JComboBox earthquakeMagnitude;
-    private JList earthquakeList;
+    private JComboBox earthquakePeriod;
+    private JList<Earthquake> earthquakeList;
 
     public
     GUI() {
@@ -39,6 +40,9 @@ class GUI {
         // Magnitude selection panel
         JPanel magnitudeSelectorPanel = new JPanel();
         magnitudeSelectorPanel.setLayout(new FlowLayout());
+        // Label for Magnitude
+        JLabel dropDownLabel = new JLabel("Magnitude:");
+        // Magnitude
         DefaultComboBoxModel earthquakeMagnitudeModel = new DefaultComboBoxModel();
         earthquakeMagnitudeModel.addElement("all");
         earthquakeMagnitudeModel.addElement("1.0");
@@ -46,13 +50,23 @@ class GUI {
         earthquakeMagnitudeModel.addElement("4.5");
         earthquakeMagnitudeModel.addElement("significant");
         earthquakeMagnitude = new JComboBox(earthquakeMagnitudeModel);
-        JLabel dropDownLabel = new JLabel("Magnitude in Richter");
+
+        // Label for Period
+        JLabel dropDownLabelForPeriod = new JLabel("Period:");
+        // Period
+        DefaultComboBoxModel earthquakePeriodModel = new DefaultComboBoxModel();
+        earthquakePeriodModel.addElement("hour");
+        earthquakePeriodModel.addElement("day");
+        earthquakePeriodModel.addElement("week");
+        earthquakePeriod = new JComboBox(earthquakePeriodModel);
+        // Button
         JButton submitButton = new JButton("Submit");
-        // Add ActionListener
         submitButton.addActionListener(new SubmitButtonClickListener());
         // Adding to JPanel
         magnitudeSelectorPanel.add(dropDownLabel);
         magnitudeSelectorPanel.add(earthquakeMagnitude);
+        magnitudeSelectorPanel.add(dropDownLabelForPeriod);
+        magnitudeSelectorPanel.add(earthquakePeriod);
         magnitudeSelectorPanel.add(submitButton);
 
         // Bottom label
@@ -99,8 +113,8 @@ class GUI {
             GetEarthquakeFromCSV getEarthquakeFromCSV = new GetEarthquakeFromCSV();
 
             try {
-                for (Earthquake eq: getEarthquakeFromCSV.getEarthquakes(earthquakeMagnitude.getSelectedItem().toString())) {
-                    earthquakeModel.addElement(eq.toString());
+                for (Earthquake eq: getEarthquakeFromCSV.getEarthquakes(earthquakeMagnitude.getSelectedItem().toString(), earthquakePeriod.getSelectedItem().toString())) {
+                    earthquakeModel.addElement(eq);
                 }
             } catch (IOException e1) {
                 e1.printStackTrace();

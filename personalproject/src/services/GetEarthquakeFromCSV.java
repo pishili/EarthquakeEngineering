@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class GetEarthquakeFromCSV {
 
     public
-    ArrayList<Earthquake> getEarthquakes(String magnitude) throws IOException {
+    ArrayList<Earthquake> getEarthquakes(String magnitude, String period) throws IOException {
         // Use URL
-        URL url = new URL("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/" + magnitude + "_day.csv");
+        URL url = new URL("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/" + magnitude + "_" + period + ".csv");
         System.out.println(url);
         URLConnection connection = url.openConnection();
         InputStreamReader input = new InputStreamReader(connection.getInputStream());
@@ -73,7 +73,7 @@ public class GetEarthquakeFromCSV {
         // Print all earthquakes by loopinhg through earthquakes
         GetEarthquakeFromCSV getEarthquakeFromCSV = new GetEarthquakeFromCSV();
 
-        for (Earthquake e: getEarthquakeFromCSV.getEarthquakes("4.5")) {
+        for (Earthquake e: getEarthquakeFromCSV.getEarthquakes("4.5", "day")) {
             System.out.println(e);
         }
     }
