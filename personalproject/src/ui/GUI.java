@@ -1,21 +1,18 @@
 package ui;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public
 class GUI {
     private JFrame mainFrame;
-    private JLabel bottomLabel = new JLabel("", JLabel.CENTER);
+    private JLabel bottomLabel = new JLabel("", JLabel.CENTER);;
     private final JTextField fromTextField = new JTextField("From Date");
     private final JTextField toTextField = new JTextField("To Date");
+    private DefaultListModel earthquakeModel = new DefaultListModel();
+    private JList earthquakeList;
 
     public
     GUI() {
@@ -34,17 +31,15 @@ class GUI {
         // Main Frame
         mainFrame = new JFrame("Earthquake Monitor");
         mainFrame.setSize(900, 900);
-        mainFrame.setLayout(new GridLayout(3, 1));
-
-        // Top label
-        JLabel topLabel = new JLabel("", JLabel.CENTER);
-        topLabel.setText("Monitor your Area Earthquake");
+        mainFrame.setLayout(new GridLayout(4, 1));
 
         // Date selection panel
         JPanel dateSelectionPanel = new JPanel();
         dateSelectionPanel.setLayout(new FlowLayout());
         JButton submitButton = new JButton("Submit");
+        // Add ActionListener
         submitButton.addActionListener(new SubmitButtonClickListener());
+        // Adding to JPanel
         dateSelectionPanel.add(fromTextField);
         dateSelectionPanel.add(toTextField);
         dateSelectionPanel.add(submitButton);
@@ -53,9 +48,31 @@ class GUI {
         bottomLabel.setSize(350, 100);
 
         // Add items to main frame
-        mainFrame.add(topLabel);
         mainFrame.add(dateSelectionPanel);
         mainFrame.add(bottomLabel);
+
+        // Earthquake Selection Panel
+        JPanel earthquakeSelectionPanel = new JPanel();
+        earthquakeList = new JList(earthquakeModel);
+        earthquakeList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        earthquakeList.setSelectedIndex(0);
+        earthquakeList.setVisibleRowCount(10);
+        JScrollPane listScrollPane = new JScrollPane(earthquakeList);
+        JButton showButton = new JButton("Show");
+        showButton.addActionListener(new ShowButtonClickListener());
+        earthquakeSelectionPanel.add(listScrollPane);
+        earthquakeSelectionPanel.add(showButton);
+
+        // Bottom label
+        bottomLabel = new JLabel("", JLabel.CENTER);
+        bottomLabel.setSize(350, 100);
+
+        // Add items to main frame
+        mainFrame.add(dateSelectionPanel);
+        mainFrame.add(earthquakeSelectionPanel);
+        mainFrame.add(bottomLabel);
+
+
     }
 
 
@@ -69,6 +86,15 @@ class GUI {
         public
         void actionPerformed(ActionEvent e) {
             bottomLabel.setText("Selecting Earthquake from date: " + fromTextField.getText() + ", to date: " + toTextField.getText());
+            earthquakeModel.addElement("ladan");
+        }
+    }
+
+    private
+    class ShowButtonClickListener implements ActionListener {
+        public
+        void actionPerformed(ActionEvent e) {
+            bottomLabel.setText("Clicked Show: " + earthquakeList.getSelectedValue());
         }
     }
 
