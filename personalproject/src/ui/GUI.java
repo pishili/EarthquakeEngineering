@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+
 public
 class GUI {
     private JFrame mainFrame;
@@ -126,7 +128,11 @@ class GUI {
     class ShowButtonClickListener implements ActionListener {
         public
         void actionPerformed(ActionEvent e) {
-            bottomLabel.setText("Clicked Show: " + earthquakeList.getSelectedValue());
+            if (earthquakeList.getSelectedValue() == null) {
+                JOptionPane.showMessageDialog(mainFrame, "Please select an earthquake first", "Oops", ERROR_MESSAGE);
+            } else {
+                bottomLabel.setText("Clicked Show: " + earthquakeList.getSelectedValue());
+            }
         }
     }
 
