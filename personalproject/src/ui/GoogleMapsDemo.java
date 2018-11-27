@@ -1,21 +1,21 @@
 package ui;
 
+import javax.swing.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 public class GoogleMapsDemo {
     public static void main(String[] args) throws IOException {
 
+        
         JFrame test = new JFrame("Google Maps");
 
         try {
+            // change the numbers based on the centre of the screen
+            // change as the user
             String latitude = "40.714728";
             String longitude = "-73.998672";
 
@@ -23,6 +23,7 @@ public class GoogleMapsDemo {
                     + latitude
                     + ","
                     + longitude
+                    // change to sattelite map
                     + "&zoom=11&size=612x612&scale=2&maptype=roadmap";
             String destinationFile = "image.jpg";
 
