@@ -1,17 +1,20 @@
 package ui;
 
+import services.Earthquake;
+import services.GetEarthquakeFromCSV;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public
 class GUI {
     private JFrame mainFrame;
     private JLabel bottomLabel = new JLabel("", JLabel.CENTER);;
-    private final JTextField fromTextField = new JTextField("From Date");
-    private final JTextField toTextField = new JTextField("To Date");
     private DefaultListModel earthquakeModel = new DefaultListModel();
+    private JComboBox earthquakeMagnitude;
     private JList earthquakeList;
 
     public
@@ -33,22 +36,30 @@ class GUI {
         mainFrame.setSize(900, 900);
         mainFrame.setLayout(new GridLayout(4, 1));
 
-        // Date selection panel
-        JPanel dateSelectionPanel = new JPanel();
-        dateSelectionPanel.setLayout(new FlowLayout());
+        // Magnitude selection panel
+        JPanel magnitudeSelectorPanel = new JPanel();
+        magnitudeSelectorPanel.setLayout(new FlowLayout());
+        DefaultComboBoxModel earthquakeMagnitudeModel = new DefaultComboBoxModel();
+        earthquakeMagnitudeModel.addElement("all");
+        earthquakeMagnitudeModel.addElement("1.0");
+        earthquakeMagnitudeModel.addElement("2.5");
+        earthquakeMagnitudeModel.addElement("4.5");
+        earthquakeMagnitudeModel.addElement("significant");
+        earthquakeMagnitude = new JComboBox(earthquakeMagnitudeModel);
+        JLabel dropDownLabel = new JLabel("Magnitude in Richter");
         JButton submitButton = new JButton("Submit");
         // Add ActionListener
         submitButton.addActionListener(new SubmitButtonClickListener());
         // Adding to JPanel
-        dateSelectionPanel.add(fromTextField);
-        dateSelectionPanel.add(toTextField);
-        dateSelectionPanel.add(submitButton);
+        magnitudeSelectorPanel.add(dropDownLabel);
+        magnitudeSelectorPanel.add(earthquakeMagnitude);
+        magnitudeSelectorPanel.add(submitButton);
 
         // Bottom label
         bottomLabel.setSize(350, 100);
 
         // Add items to main frame
-        mainFrame.add(dateSelectionPanel);
+        mainFrame.add(magnitudeSelectorPanel);
         mainFrame.add(bottomLabel);
 
         // Earthquake Selection Panel
@@ -68,11 +79,9 @@ class GUI {
         bottomLabel.setSize(350, 100);
 
         // Add items to main frame
-        mainFrame.add(dateSelectionPanel);
+        mainFrame.add(magnitudeSelectorPanel);
         mainFrame.add(earthquakeSelectionPanel);
         mainFrame.add(bottomLabel);
-
-
     }
 
 
@@ -85,8 +94,17 @@ class GUI {
     class SubmitButtonClickListener implements ActionListener {
         public
         void actionPerformed(ActionEvent e) {
-            bottomLabel.setText("Selecting Earthquake from date: " + fromTextField.getText() + ", to date: " + toTextField.getText());
-            earthquakeModel.addElement("ladan");
+            bottomLabel.setText("Selecting Earthquake for magnitude: " + earthquakeMagnitude.getSelectedItem());
+            earthquakeModel.removeAllElements();
+            GetEarthquakeFromCSV getEarthquakeFromCSV = new GetEarthquakeFromCSV();
+
+            try {
+                for (Earthquake eq: getEarthquakeFromCSV.getEarthquakes(earthquakeMagnitude.getSelectedItem().toString())) {
+                    earthquakeModel.addElement(eq.toString());
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

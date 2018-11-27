@@ -11,9 +11,10 @@ import java.util.ArrayList;
 public class GetEarthquakeFromCSV {
 
     public
-    ArrayList<Earthquake> getEarthquakes() throws IOException {
+    ArrayList<Earthquake> getEarthquakes(String magnitude) throws IOException {
         // Use URL
-        URL url = new URL("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv");
+        URL url = new URL("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/" + magnitude + "_day.csv");
+        System.out.println(url);
         URLConnection connection = url.openConnection();
         InputStreamReader input = new InputStreamReader(connection.getInputStream());
 
@@ -26,7 +27,6 @@ public class GetEarthquakeFromCSV {
         Boolean isHeader = true;
         try {
 
-//            br = new BufferedReader(new FileReader(csvFile));
             br = new BufferedReader(input);
             while ((line = br.readLine()) != null) {
 
@@ -73,20 +73,8 @@ public class GetEarthquakeFromCSV {
         // Print all earthquakes by loopinhg through earthquakes
         GetEarthquakeFromCSV getEarthquakeFromCSV = new GetEarthquakeFromCSV();
 
-        for (Earthquake e: getEarthquakeFromCSV.getEarthquakes()) {
+        for (Earthquake e: getEarthquakeFromCSV.getEarthquakes("4.5")) {
             System.out.println(e);
         }
-
-        //url: https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.csv
-//        String csvFile = "/Users/ladan/code/data_earth/all_day.csv";
-//        String csvFile = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.csv";
-
-
-//    @Override
-//    public String toString() {
-//        String result = "ToDoList Title: " + name + "\n";
-//        result += tasks.values().toString();
-//        return result;
-//    }
     }
 }
