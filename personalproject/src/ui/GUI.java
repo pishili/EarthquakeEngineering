@@ -7,10 +7,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public
 class GUI {
     private JFrame mainFrame;
+    private JLabel bottomLabel = new JLabel("", JLabel.CENTER);
+    private final JTextField fromTextField = new JTextField("From Date");
+    private final JTextField toTextField = new JTextField("To Date");
 
     public
     GUI() {
@@ -38,15 +43,13 @@ class GUI {
         // Date selection panel
         JPanel dateSelectionPanel = new JPanel();
         dateSelectionPanel.setLayout(new FlowLayout());
-        JTextField fromTextField = new JTextField("From Date");
-        JTextField toTextField = new JTextField("To Date");
         JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(new SubmitButtonClickListener());
         dateSelectionPanel.add(fromTextField);
         dateSelectionPanel.add(toTextField);
         dateSelectionPanel.add(submitButton);
 
         // Bottom label
-        JLabel bottomLabel = new JLabel("", JLabel.CENTER);
         bottomLabel.setSize(350, 100);
 
         // Add items to main frame
@@ -59,6 +62,14 @@ class GUI {
     private
     void showGui() {
         mainFrame.setVisible(true);
+    }
+
+    private
+    class SubmitButtonClickListener implements ActionListener {
+        public
+        void actionPerformed(ActionEvent e) {
+            bottomLabel.setText("Selecting Earthquake from date: " + fromTextField.getText() + ", to date: " + toTextField.getText());
+        }
     }
 
 }
