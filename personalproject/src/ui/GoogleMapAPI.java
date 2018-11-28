@@ -1,31 +1,35 @@
 package ui;
 
-import javax.swing.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 
-public class GoogleMapsDemo {
-    public static void main(String[] args) throws IOException {
+public class GoogleMapAPI {
 
-        
-        JFrame test = new JFrame("Google Maps");
-
+    public String getImageURL(String latitude, String longitude, String markerColor) {
+        String destinationFile = null;
         try {
             // change the numbers based on the centre of the screen
             // change as the user
-            String latitude = "40.714728";
-            String longitude = "-73.998672";
-
             String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
                     + latitude
                     + ","
                     + longitude
+                    + "&size=600x600"
+                    + "&zoom=5"
+                    + "&markers=color:"
+                    +  markerColor
+                    + "%7Clabel:S%7C"
+                    + latitude
+                    + ","
+                    + longitude
                     // change to sattelite map
-                    + "&zoom=11&size=612x612&scale=2&maptype=roadmap";
-            String destinationFile = "image.jpg";
+                    + "&key=AIzaSyCcYrfTKZz2qXMLfn2EbllCCWQf_9CW74A";
+            destinationFile = "image.jpg";
+
+            System.out.println(imageUrl);
 
             // read the map image from Google
             // then save it to a local file: image.jpg
@@ -45,18 +49,7 @@ public class GoogleMapsDemo {
             os.close();
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
         }
-
-        // create a GUI component that loads the image: image.jpg
-        //
-        ImageIcon imageIcon = new ImageIcon((new ImageIcon("image.jpg"))
-                .getImage().getScaledInstance(630, 600,
-                        java.awt.Image.SCALE_SMOOTH));
-        test.add(new JLabel(imageIcon));
-
-        // show the GUI window
-        test.setVisible(true);
-        test.pack();
+        return destinationFile;
     }
 }
