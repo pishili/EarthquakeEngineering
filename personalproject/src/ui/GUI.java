@@ -15,13 +15,14 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 public
 class GUI {
     private JFrame mainFrame;
-    private JLabel bottomLabel = new JLabel("", JLabel.CENTER);;
+    private JLabel bottomLabel = new JLabel("", JLabel.CENTER);
     private DefaultListModel earthquakeModel = new DefaultListModel();
     private JComboBox earthquakeMagnitude;
     private JComboBox earthquakePeriod;
     private JList<Earthquake> earthquakeList;
     private ImageIcon imageIcon;
     private JLabel mapJLabel;
+
 
     public
     GUI() {
@@ -42,9 +43,9 @@ class GUI {
         mainFrame.setSize(1000, 800);
         mainFrame.setLayout(new GridLayout(4, 1));
 
-        // Magnitude selection panel
-        JPanel magnitudeSelectorPanel = new JPanel();
-        magnitudeSelectorPanel.setLayout(new FlowLayout());
+        // selection panel
+        JPanel earthquakeSelectorPanel = new JPanel();
+        earthquakeSelectorPanel.setLayout(new FlowLayout());
         // Label for Magnitude
         JLabel dropDownLabel = new JLabel("Magnitude:");
         // Magnitude
@@ -68,30 +69,37 @@ class GUI {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(new SubmitButtonClickListener());
         // Adding to JPanel
-        magnitudeSelectorPanel.add(dropDownLabel);
-        magnitudeSelectorPanel.add(earthquakeMagnitude);
-        magnitudeSelectorPanel.add(dropDownLabelForPeriod);
-        magnitudeSelectorPanel.add(earthquakePeriod);
-        magnitudeSelectorPanel.add(submitButton);
+        earthquakeSelectorPanel.add(dropDownLabel);
+        earthquakeSelectorPanel.add(earthquakeMagnitude);
+        earthquakeSelectorPanel.add(dropDownLabelForPeriod);
+        earthquakeSelectorPanel.add(earthquakePeriod);
+        earthquakeSelectorPanel.add(submitButton);
 
         // Bottom label
         bottomLabel.setSize(350, 100);
 
         // Earthquake Selection Panel
         JPanel earthquakeSelectionPanel = new JPanel();
+
+        // creating earthquakeList using JList
         earthquakeList = new JList(earthquakeModel);
+        // using setters on earthquakeList
         earthquakeList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         earthquakeList.setSelectedIndex(0);
         earthquakeList.setVisibleRowCount(10);
+        // creating JScrollPane
         JScrollPane listScrollPane = new JScrollPane(earthquakeList);
+        // creating showButton
         JButton showButton = new JButton("Show");
+        // adding listener to show button
         showButton.addActionListener(new ShowButtonClickListener());
+        // adding the listScrollPane and showButton to
         earthquakeSelectionPanel.add(listScrollPane);
         earthquakeSelectionPanel.add(showButton);
 
         // Map Image
         imageIcon = new ImageIcon((new ImageIcon("image.jpg"))
-                .getImage().getScaledInstance(630, 600,
+                .getImage().getScaledInstance(730, 730,
                         java.awt.Image.SCALE_SMOOTH));
         mapJLabel = new JLabel(imageIcon);
 
@@ -100,7 +108,7 @@ class GUI {
         bottomLabel.setSize(350, 100);
 
         // Add items to main frame
-        mainFrame.add(magnitudeSelectorPanel);
+        mainFrame.add(earthquakeSelectorPanel);
         mainFrame.add(earthquakeSelectionPanel);
         mainFrame.add(mapJLabel);
         mainFrame.add(bottomLabel);
@@ -140,11 +148,17 @@ class GUI {
             } else {
                 Earthquake earthquake = earthquakeList.getSelectedValue();
 
+                Double sum = 0.0;
+                for(int i=0; i<earthquakeList.getModel().getSize(); i++) {
+                    sum += earthquakeList.getModel().getElementAt(i).getMagnitude();
+                }
+                System.out.println(sum);
+
 
 
                 GoogleMapAPI googleMapAPI = new GoogleMapAPI();
-                googleMapAPI.getImageURL(earthquake.getLatitude().toString(), earthquake.getlongitude().toString(), getMarkerColorWithMagnitude(earthquake));
-                imageIcon = new ImageIcon((new ImageIcon("image.jpg"))
+                String fileDestination = googleMapAPI.getImageFilDestination(earthquake.getLatitude().toString(), earthquake.getlongitude().toString(), getMarkerColorWithMagnitude(earthquake));
+                imageIcon = new ImageIcon((new ImageIcon(fileDestination))
                         .getImage().getScaledInstance(700, 700,
                                 java.awt.Image.SCALE_SMOOTH));
                 // mapJLabel = new JLabel(imageIcon);

@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class GoogleMapAPI {
 
-    public String getImageURL(String latitude, String longitude, String markerColor) {
+    public String getImageFilDestination(String latitude, String longitude, String markerColor) {
         String destinationFile = null;
         try {
             // change the numbers based on the centre of the screen
@@ -33,11 +33,12 @@ public class GoogleMapAPI {
 
             // read the map image from Google
             // then save it to a local file: image.jpg
-            //
+            // downloading image
             URL url = new URL(imageUrl);
             InputStream is = url.openStream();
             OutputStream os = new FileOutputStream(destinationFile);
 
+            //2048
             byte[] b = new byte[2048];
             int length;
 
