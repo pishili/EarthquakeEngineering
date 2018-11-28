@@ -122,6 +122,7 @@ class GUI {
 
     private
     class SubmitButtonClickListener implements ActionListener {
+        @Override
         public
         void actionPerformed(ActionEvent e) {
             bottomLabel.setText("Selecting Earthquake for magnitude: " + earthquakeMagnitude.getSelectedItem());
@@ -134,12 +135,15 @@ class GUI {
                 }
             } catch (IOException e1) {
                 e1.printStackTrace();
+                JOptionPane.showMessageDialog(mainFrame, "Make sure to connect to internet", "Oops", ERROR_MESSAGE);
             }
         }
     }
 
     private
     class ShowButtonClickListener implements ActionListener {
+
+        @Override
         public
         void actionPerformed(ActionEvent e) {
             String color;
