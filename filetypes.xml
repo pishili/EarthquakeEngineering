@@ -2,6 +2,7 @@
   <component name="FileTypeManager" version="17">
     <extensionMap>
       <mapping pattern="Person" type="PLAIN_TEXT" />
+      <mapping pattern="FimFest_Confirmation.md" type="PLAIN_TEXT" />
       <mapping pattern="machine_learning" type="PLAIN_TEXT" />
       <mapping pattern="TODOLSep3.md" type="PLAIN_TEXT" />
       <mapping pattern="bokeh_line" type="PLAIN_TEXT" />
