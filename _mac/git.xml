@@ -1,6 +1,6 @@
 <application>
   <component name="Git.Application.Settings">
-    <option name="myPathToGit" value="https://github.ugrad.cs.ubc.ca/CPSC210-2018W-T1/" />
+    <option name="myPathToGit" value="/usr/local/bin/git" />
     <option name="SSH_EXECUTABLE" value="IDEA_SSH" />
   </component>
 </application>
