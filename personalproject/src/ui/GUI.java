@@ -1,5 +1,10 @@
 package ui;
 
+import org.jxmapviewer.JXMapKit;
+import org.jxmapviewer.VirtualEarthTileFactoryInfo;
+import org.jxmapviewer.viewer.DefaultTileFactory;
+import org.jxmapviewer.viewer.GeoPosition;
+import org.jxmapviewer.viewer.TileFactoryInfo;
 import services.Earthquake;
 import services.GetEarthquakeFromCSV;
 
@@ -22,6 +27,7 @@ class GUI {
     private JList<Earthquake> earthquakeList;
     private ImageIcon imageIcon;
     private JLabel mapJLabel;
+    private JXMapKit jXMapKit = new JXMapKit();
 
 
     public
@@ -41,11 +47,11 @@ class GUI {
         // Main Frame
         mainFrame = new JFrame("Earthquake Monitor");
         mainFrame.setSize(1000, 800);
-        mainFrame.setLayout(new GridLayout(4, 1));
+        mainFrame.setLayout(new GridBagLayout());
 
         // selection panel
-        JPanel earthquakeSelectorPanel = new JPanel();
-        earthquakeSelectorPanel.setLayout(new FlowLayout());
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new FlowLayout());
         // Label for Magnitude
         JLabel dropDownLabel = new JLabel("Magnitude:");
         // Magnitude
@@ -69,11 +75,11 @@ class GUI {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(new SubmitButtonClickListener());
         // Adding to JPanel
-        earthquakeSelectorPanel.add(dropDownLabel);
-        earthquakeSelectorPanel.add(earthquakeMagnitude);
-        earthquakeSelectorPanel.add(dropDownLabelForPeriod);
-        earthquakeSelectorPanel.add(earthquakePeriod);
-        earthquakeSelectorPanel.add(submitButton);
+        inputPanel.add(dropDownLabel);
+        inputPanel.add(earthquakeMagnitude);
+        inputPanel.add(dropDownLabelForPeriod);
+        inputPanel.add(earthquakePeriod);
+        inputPanel.add(submitButton);
 
         // Bottom label
         bottomLabel.setSize(350, 100);
@@ -99,19 +105,37 @@ class GUI {
 
         // Map Image
         imageIcon = new ImageIcon((new ImageIcon("image.jpg"))
-                .getImage().getScaledInstance(730, 730,
+                .getImage().getScaledInstance(600, 300,
                         java.awt.Image.SCALE_SMOOTH));
         mapJLabel = new JLabel(imageIcon);
+
+        // Interactive Map
+        // TileFactoryInfo info = new OSMTileFactoryInfo();
+        TileFactoryInfo info = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.MAP);
+        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+        jXMapKit.setTileFactory(tileFactory);
+        jXMapKit.setZoom(11);
 
         // Bottom label
         bottomLabel = new JLabel("", JLabel.CENTER);
         bottomLabel.setSize(350, 100);
 
         // Add items to main frame
-        mainFrame.add(earthquakeSelectorPanel);
-        mainFrame.add(earthquakeSelectionPanel);
-        mainFrame.add(mapJLabel);
-        mainFrame.add(bottomLabel);
+        // https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridy = 0;
+        mainFrame.add(inputPanel, c);
+        c.gridy = 1;
+        mainFrame.add(earthquakeSelectionPanel, c);
+        c.gridy = 2;
+        mainFrame.add(mapJLabel, c);
+        c.gridy = 3;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1;
+        c.weighty = 1;
+        mainFrame.add(jXMapKit, c);
+        c.gridy = 4;
+        mainFrame.add(bottomLabel, c);
     }
 
 
@@ -152,30 +176,24 @@ class GUI {
             } else {
                 Earthquake earthquake = earthquakeList.getSelectedValue();
 
-                Double sum = 0.0;
-                for(int i=0; i<earthquakeList.getModel().getSize(); i++) {
-                    sum += earthquakeList.getModel().getElementAt(i).getMagnitude();
-                }
-                System.out.println(sum);
-
-
-
                 GoogleMapAPI googleMapAPI = new GoogleMapAPI();
                 String fileDestination = googleMapAPI.getImageFilDestination(earthquake.getLatitude().toString(), earthquake.getlongitude().toString(), getMarkerColorWithMagnitude(earthquake));
                 imageIcon = new ImageIcon((new ImageIcon(fileDestination))
-                        .getImage().getScaledInstance(700, 700,
+                        .getImage().getScaledInstance(600, 300,
                                 java.awt.Image.SCALE_SMOOTH));
                 // mapJLabel = new JLabel(imageIcon);
                 mapJLabel.setIcon(imageIcon);
 
-                bottomLabel.setText("Clicked Show: " + earthquake);
+                // Adding Interactive Map location
+                final GeoPosition gp = new GeoPosition(earthquake.getLatitude(), earthquake.getlongitude());
+                jXMapKit.setAddressLocation(gp);
 
+                bottomLabel.setText(earthquake.toString());
             }
         }
 
         public String getMarkerColorWithMagnitude(Earthquake e) {
-            String color = null;
-            Earthquake earthquake = earthquakeList.getSelectedValue();
+            String color;
             if (e.getMagnitude()<3) {
                 color = "green";
             } else if(e.getMagnitude()<4 ) {

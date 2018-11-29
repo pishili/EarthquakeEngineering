@@ -17,7 +17,7 @@ public class GoogleMapAPI {
                     + latitude
                     + ","
                     + longitude
-                    + "&size=600x600"
+                    + "&size=600x300"
                     + "&zoom=5"
                     + "&markers=color:"
                     +  markerColor
