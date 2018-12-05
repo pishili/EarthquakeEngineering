@@ -234,8 +234,12 @@
           <option name="url" value="https://github.ugrad.cs.ubc.ca/CPSC210-2018W-T1/MoreIteratorsStarter.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.ugrad.cs.ubc.ca/CPSC210-2018W-T1/MoreIteratorsComplete.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="$USER_HOME$/code/210_2018W/D9" />
+    <option name="cloneParentDir" value="$USER_HOME$/code/210_2018W/D9/2" />
   </component>
 </application>
