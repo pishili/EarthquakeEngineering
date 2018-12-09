@@ -254,8 +254,12 @@
           <option name="url" value="https://github.com/UBCx-Software-Construction/data-abstraction-practice-projects.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/UBCx-Software-Construction/data-abstraction-solutions.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="$USER_HOME$/code/210_2018W" />
+    <option name="cloneParentDir" value="$USER_HOME$/code/210_2018W/t" />
   </component>
 </application>
