@@ -9,6 +9,7 @@
       <mapping pattern="close sidebar webwork/2018w1_stat200_101/takehome-activity-oct-10/1 TakeHome-Activity-Oct-10: Problem 1" type="PLAIN_TEXT" />
       <mapping pattern="my_tasks" type="PLAIN_TEXT" />
       <mapping pattern="CS340_Sep10_2018" type="PLAIN_TEXT" />
+      <mapping pattern="Component" type="PLAIN_TEXT" />
       <mapping pattern="CS340_Sep12_2018" type="PLAIN_TEXT" />
       <mapping pattern="cake" type="PLAIN_TEXT" />
       <mapping pattern="macos" type="PLAIN_TEXT" />
